@@ -15,7 +15,7 @@ LinkedIn: linkedin.com/in/abhimanyu-rawat-3a4754161
 |-----|------------------------------------------------|--------|
 | Day 1 | Phishing Analysis, OSINT, Digital Footprint | Done   |
 | Day 2 | Network Recon, OSINT, File Integrity, IOCs  | Done   |
-
+| Day 3 | Persistence, Process Trees, Hidden Files, ADS | Done |
 ---
 
 ## Day 1 – Operation First Contact
@@ -82,6 +82,51 @@ Incident Response:
 Identified port 4444 outbound TCP as Metasploit reverse shell
 indicator (C2 activity). Containment steps executed.
 Mapped to MITRE ATT&CK T1571 (Non-Standard Port).
+
+---
+
+## Day 3 – Operation Phantom Hunt
+
+Category: Persistence Analysis, Malware Investigation, Detection
+
+Tasks Completed:
+- D3-01: Persistence Analysis (Startup) – Audited system startup
+  locations using Task Manager to identify auto-run programs
+- D3-02: Process Tree Mapping – Analyzed parent-child relationships
+  in msedge.exe (21 child processes) to understand modern browser
+  architecture and isolation
+- D3-03: Hidden File Detection – Used dir /a:h to audit hidden
+  system files and scan for suspicious naming patterns like
+  double extensions or triple dots
+- D3-04: Alternate Data Streams (ADS) – Successfully created and
+  detected a hidden data stream (test.txt:hidden.txt) and identified
+  Zone.Identifier tags on downloaded files
+- D3-05: Malware Behavior Report – Authored a formal incident report
+  for a Medium-severity browser hijack simulation, documenting
+  IOCs and containment steps
+- D3-06: Persistence Reflection – Evaluated why attackers utilize
+  registry run keys and startup folders to maintain long-term
+  access to compromised systems
+
+Key Findings:
+
+Persistence Hunting:
+Identified Update.vbs and a generic "Program" entry in the startup
+list. As legitimate software rarely uses VBScripts as direct startup
+entries, this was flagged as a high-risk persistence mechanism
+often used for silent execution.
+
+Forensic Detection:
+Successfully uncovered Alternate Data Streams (ADS) using dir /r.
+Verified that metadata like Zone.Identifier is used by Windows to
+track file origins, but can be abused by attackers to hide malicious
+payloads within legitimate-looking files.
+
+Incident Response:
+The simulation of a browser hijack highlighted the necessity of
+monitoring non-standard startup entries and hidden attributes when
+antivirus (AV) fails to trigger.
+Mapped to MITRE ATT&CK T1547.001 (Boot or Logon Autostart Execution).
 
 ---
 
