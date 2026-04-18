@@ -16,6 +16,8 @@ LinkedIn: linkedin.com/in/abhimanyu-rawat-3a4754161
 | Day 1 | Phishing Analysis, OSINT, Digital Footprint | Done   |
 | Day 2 | Network Recon, OSINT, File Integrity, IOCs  | Done   |
 | Day 3 | Persistence, Process Trees, Hidden Files, ADS | Done |
+| Day 4 | Alert Triage, Log Analysis, Correlation, IR        | Done   |
+
 ---
 
 ## Day 1 – Operation First Contact
@@ -130,6 +132,35 @@ Mapped to MITRE ATT&CK T1547.001 (Boot or Logon Autostart Execution).
 
 ---
 
+## Day 4 – Operation Alarm: Investigating Real Alerts
+
+Category: Alert Triage, Log Analysis, Correlation, Incident Response
+
+Tasks Completed:
+- D4-01: Alert triage — powershell.exe spawned by winword.exe
+  confirmed as true positive via VBA macro research
+- D4-02: Failed login analysis — journalctl on Kali, 7 real
+  auth failures found from local terminal, risk low
+- D4-03: Network correlation — netstat + lsof cross-platform
+  check, C2 IP 185.130.5.253 not active, SMB noted
+- D4-04: False positive analysis — svchost.exe DNS queries
+  confirmed benign via Dnscache service verification
+- D4-05: SOC triage report — cmd.exe download at 2 AM,
+  no user session, true positive, endpoint isolation recommended
+
+Key Finding:
+Two critical discoveries stand out across Day 4. First, the
+correlation of cmd.exe running at 2 AM with no active user
+session and an outbound connection to a .exe download URL
+confirmed a true positive — demonstrating why time-based
+behavioral baselining is essential in SOC operations.
+Second, a real authentication failure pattern was found in
+Kali Linux logs — 4 failed su/password attempts across two
+days targeting both root and kali accounts, discovered using
+journalctl after legacy tools like lastb were unavailable
+in Kali 2026.1.
+MITRE: T1105 – Ingress Tool Transfer, T1078 – Valid Accounts.
+
 ## About Me
 Cybersecurity professional with 2+ years in endpoint security
 and EDR/XDR at Sophos. Transitioning into SOC Analysis and
@@ -140,4 +171,3 @@ Core Skills: Sophos Central, Intercept X, EDR/XDR, Wireshark,
 Splunk, Microsoft Sentinel, KQL, MITRE ATT&CK, Nmap, OSINT
 
 LinkedIn: linkedin.com/in/abhimanyu-rawat-3a4754161
-Website: www.socialasto.com
