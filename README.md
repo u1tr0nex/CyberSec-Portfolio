@@ -149,6 +149,7 @@ Tasks Completed:
   no user session, true positive, endpoint isolation recommended
 
 Key Finding:
+
 Two critical discoveries stand out across Day 4. First, the
 correlation of cmd.exe running at 2 AM with no active user
 session and an outbound connection to a .exe download URL
