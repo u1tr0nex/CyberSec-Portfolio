@@ -17,6 +17,8 @@ LinkedIn: linkedin.com/in/abhimanyu-rawat-3a4754161
 | Day 2 | Network Recon, OSINT, File Integrity, IOCs  | Done   |
 | Day 3 | Persistence, Process Trees, Hidden Files, ADS | Done |
 | Day 4 | Alert Triage, Log Analysis, Correlation, IR        | Done   |
+| Day 5 | Vulnerability Scanning, Password Analysis, Recon, Pentest | Done |
+| Capstone | Full IR Simulation — Nexus Solutions Ransomware | Done |
 
 ---
 
@@ -161,6 +163,87 @@ days targeting both root and kali accounts, discovered using
 journalctl after legacy tools like lastb were unavailable
 in Kali 2026.1.
 MITRE: T1105 – Ingress Tool Transfer, T1078 – Valid Accounts.
+
+---
+
+## Day 5 – Operation Phantom Entry: Thinking Like an Attacker
+
+Category: Vulnerability Scanning, Password Analysis,
+Phishing Simulation, Reconnaissance, Penetration Testing
+
+Tasks Completed:
+- D5-01: Localhost vulnerability scan — nmap -sV 127.0.0.1
+  on Kali Linux. All 1000 ports closed. Clean and hardened
+  configuration confirmed. CVE-2023-38408 (OpenSSH RCE)
+  documented as simulated service reference.
+- D5-02: Password strength analysis — tested password123,
+  administrator, admin (all pwned) vs Youngdumbroke@6497
+  (not pwned) on haveibeenpwned.com/Passwords. Confirmed
+  that weak default credentials appear in millions of
+  credential dumps and are prime targets for spraying attacks.
+- D5-03: Canarytoken creation — generated URL token on
+  canarytokens.com and embedded in fake invoice document.
+  Analyzed how attackers use tracking tokens to silently
+  harvest victim IP, browser, and OS data before deploying
+  a real payload.
+- D5-04: OSINT reconnaissance — Google dorks against fictional
+  target "Socialasto" to simulate attacker recon. Identified
+  3 attack-ready data points: employee names via LinkedIn,
+  credential exposure via paste sites, internal infrastructure
+  via public PDFs.
+- D5-05: Penetration test summary report — documented open
+  SSH port 22 with admin:admin credentials (Critical) and
+  Apache 2.4.29 with CVE-2021-41773 RCE vulnerability (High).
+  Full remediation timeline provided.
+
+Key Finding:
+Google dork reconnaissance against a fictional target
+demonstrated that an attacker can map employee names,
+exposed credentials, and internal infrastructure without
+sending a single packet to the target — zero footprint,
+full intel. Combined with the password analysis showing
+"admin" appearing in millions of breach dumps, this
+illustrates why default credentials and poor OSINT hygiene
+represent the lowest-effort, highest-impact attack surface.
+MITRE: T1590 – Gather Victim Network Information,
+T1593 – Search Open Websites/Domains,
+T1110.001 – Brute Force: Password Guessing.
+
+---
+
+## Final Capstone – Operation Phoenix Rising
+
+Category: Full Incident Response — Investigation, Containment,
+Eradication, Recovery, Reporting
+
+Scenario:
+Employee Alex at Nexus Solutions opened a malicious Word document.
+A VBA macro spawned PowerShell, connected to C2 at
+185.130.5.253:4444, dropped svcboost.exe, established registry
+persistence, and encrypted Documents files with a 0.5 BTC ransom
+demand — all within 60 seconds.
+
+Tasks Completed:
+- CAP-01: Alert log analysis — identified powershell.exe spawned
+  by winword.exe, C2 IP 185.130.5.253:4444, and ransomware
+  dropper svcboost.exe. VirusTotal showed clean — classified
+  malicious via behavioral context (reputation gap noted).
+- CAP-02: Containment — blocked C2 IP via netsh firewall rule,
+  force-killed powershell.exe and svcboost.exe, deleted registry
+  run key, isolated endpoint from network.
+- CAP-03: Recovery — full EDR scan, VSS shadow copy check,
+  file restoration from OneDrive version history, endpoint
+  reimaged, macro awareness training for employee Alex.
+- CAP-04: Incident Closure Report — full timeline, IOC table,
+  containment and eradication steps, 3 prevention recommendations.
+
+Key Finding:
+The complete attack chain from macro execution to file encryption
+took under 60 seconds, demonstrating why behavioral EDR detection
+is more reliable than reputation-based tools. The C2 IP appeared
+clean on VirusTotal — a real-world "reputation gap" scenario where
+analyst judgment and behavioral context determined the verdict.
+MITRE: T1566.001, T1059.001, T1105, T1547.001, T1486
 
 ## About Me
 Cybersecurity professional with 2+ years in endpoint security
