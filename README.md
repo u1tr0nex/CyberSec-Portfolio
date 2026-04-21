@@ -211,6 +211,46 @@ T1110.001 – Brute Force: Password Guessing.
 
 ---
 
+## Day 5 – Operation Phantom Entry: Thinking Like an Attacker
+
+Category: Vulnerability Scanning, Password Analysis,
+Phishing Simulation, Reconnaissance, Penetration Testing
+
+Tasks Completed:
+- D5-01: Localhost vulnerability scan — nmap -sV 127.0.0.1
+  on Kali Linux. All 1000 ports closed. Clean and hardened
+  configuration confirmed. No services running on localhost.
+- D5-02: Password strength analysis — tested password123,
+  administrator, admin (all pwned) vs Youngdumbroke@6497
+  (not pwned) on haveibeenpwned.com. Confirmed weak default
+  credentials appear in millions of breach dumps.
+- D5-03: Canarytoken URL token embedded in fake $10,000
+  invoice document. Demonstrated how attackers silently
+  harvest victim IP and device data without deploying malware.
+- D5-04: OSINT reconnaissance using Google dorks against
+  fictional target "Socialasto." Identified 3 attacker-ready
+  data points: employee names via LinkedIn, credential leaks
+  via paste sites, infrastructure details via public PDFs.
+- D5-05: Penetration test summary report — SSH port 22 with
+  admin:admin (Critical) and Apache 2.4.29 with
+  CVE-2021-41773 RCE (High). Overall risk: Critical.
+  Full remediation timeline provided.
+
+Key Finding:
+Google dork reconnaissance against fictional target Socialasto
+demonstrated that an attacker can map employee names, exposed
+credentials, and internal infrastructure without sending a
+single packet — zero footprint, full intel. Combined with
+password analysis confirming "admin" exists in millions of
+breach dumps, this illustrates why default credentials and
+poor OSINT hygiene are the lowest-effort, highest-impact
+attack surface for any threat actor.
+MITRE: T1590 – Gather Victim Network Information,
+T1593 – Search Open Websites/Domains,
+T1110.001 – Brute Force: Password Guessing.
+
+---
+
 ## Final Capstone – Operation Phoenix Rising
 
 Category: Full Incident Response — Investigation, Containment,
